@@ -33,7 +33,7 @@ class BaseSimpleType:
 
     @classmethod
     def convert_from_xml(cls, str_value: str) -> Any:
-        return int(str_value)
+        return int(float(str_value))
 
     @classmethod
     def convert_to_xml(cls, value: Any) -> str: ...
@@ -65,7 +65,7 @@ class BaseSimpleType:
 class BaseIntType(BaseSimpleType):
     @classmethod
     def convert_from_xml(cls, str_value: str) -> int:
-        return int(str_value)
+        return int(float(str_value))
 
     @classmethod
     def convert_to_xml(cls, value: int) -> str:
@@ -200,7 +200,7 @@ class ST_Coordinate(BaseIntType):
     def convert_from_xml(cls, str_value: str) -> Length:
         if "i" in str_value or "m" in str_value or "p" in str_value:
             return ST_UniversalMeasure.convert_from_xml(str_value)
-        return Emu(int(str_value))
+        return Emu(int(float(str_value)))
 
     @classmethod
     def validate(cls, value: Any) -> None:
@@ -294,7 +294,7 @@ class ST_OnOff(XsdBoolean):
 class ST_PositiveCoordinate(XsdLong):
     @classmethod
     def convert_from_xml(cls, str_value: str) -> Length:
-        return Emu(int(str_value))
+        return Emu(int(float(str_value)))
 
     @classmethod
     def validate(cls, value: Any) -> None:
@@ -346,7 +346,7 @@ class ST_TwipsMeasure(XsdUnsignedLong):
     def convert_from_xml(cls, str_value: str) -> Length:
         if "i" in str_value or "m" in str_value or "p" in str_value:
             return ST_UniversalMeasure.convert_from_xml(str_value)
-        return Twips(int(str_value))
+        return Twips(int(float(str_value)))
 
     @classmethod
     def convert_to_xml(cls, value: int | Length) -> str:
