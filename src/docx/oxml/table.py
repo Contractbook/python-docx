@@ -89,7 +89,7 @@ class CT_Row(BaseOxmlElement):
             if remaining_offset < 0:
                 break
             # -- We've arrived at grid_offset, this is the `w:tc` we're looking for. --
-            if remaining_offset == 0:
+            if remaining_offset < tc.grid_span:
                 return tc
             # -- We're not there yet, skip forward the number of layout-grid cells this cell
             # -- occupies.
